@@ -6,6 +6,7 @@ import { Book } from "@/components/BookList/Book";
 import Image from "next/legacy/image";
 
 export default function AlbumGrid({ book }: { book: any }) {
+    console.log(book)
     return (
         <section className="single-book mt-14">
             {/* {JSON.stringify(book)} */}

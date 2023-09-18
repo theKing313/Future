@@ -35,7 +35,8 @@ export const getSingleBook = createAsyncThunk("getBooksSortedByDate", async (sea
         console.log(searchTermId)
         console.log(searchTermId.date)
         const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${searchTermId}`)
-        console.log(thunkApi)
+        console.log(response)
+
         if (response.data) {
             console.log(response.data)
         }
