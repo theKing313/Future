@@ -64,8 +64,13 @@ export const booksSreach = createSlice({
 
         sortingByDate: (state, action) => {
 
-            if (action.payload === 'newest') {
+            if (action.payload === 'newest' && state.books[0]?.status !== 'falling') {
+                // if (state.books[0]?.status === 'falling') {
+                //     state.books = state.bookByCategory
+                // }
+
                 const arrYears: any[] = []
+
                 state.books.map((item: any) => {
                     if (item.publishedDate) {
                         arrYears.push({ Year: parseInt(item.publishedDate), id: item.id })
@@ -83,6 +88,8 @@ export const booksSreach = createSlice({
                     })
                 })
                 state.books = newSortedBooks
+                state.totalBooksNumber = newSortedBooks.length
+
             }
 
         },
@@ -92,17 +99,9 @@ export const booksSreach = createSlice({
 
             if (state.books[0]?.status === 'falling') {
                 state.books = state.bookByCategory
-
             } else if (action.payload === 'all') {
-
-                // state.relevanceBooks
                 state.books = state.bookByCategory
-
-
-                // delete this
-                // state.relevanceBooks = state.bookByCategory
             }
-
             state.books.map((item: any) => {
 
                 if (item.categories !== undefined) {
@@ -126,10 +125,12 @@ export const booksSreach = createSlice({
             } else {
                 if (action.payload === 'all') {
                     state.books = state.bookByCategory
+                    state.totalBooksNumber = state.bookByCategory.length
                 } else {
                     state.books = [
                         { status: 'falling' }
                     ]
+                    state.totalBooksNumber = 0
                 }
             }
 
